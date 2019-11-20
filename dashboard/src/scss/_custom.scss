@@ -1,0 +1,29 @@
+// Here you can add other styles
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.app-body .main {
+    margin-top: 10px;
+}
+
+div.selectable-table {
+  table {
+    tr {
+      &:hover {
+        background-color: beige;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.ant-notification {
+  z-index: 2000 !important;
+}
+
+.main .loading-background {
+  z-index: 1500;
+}

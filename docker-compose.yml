@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:3.4-jessie
+    container_name: mongodb
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    networks:
+      - fullstack
+
+  fullstack-api:
+    container_name: fullstack-api
+    build:
+      context: ./api
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - DB_URL=mongodb://mongodb:27017/result-service
+    networks:
+      - fullstack
+
+  fullstack-dashboard:
+    container_name: fullstack-dashboard
+    build:
+      context: ./dashboard
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "5001:80"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:4000/api/v1/
+
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    external: true

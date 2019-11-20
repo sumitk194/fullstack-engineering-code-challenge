@@ -1,0 +1,10 @@
+# compiled output
+/dist
+/node_modules
+/.vscode
+
+# Node.js files
+package-lock.json
+
+# Environment Files
+.env
